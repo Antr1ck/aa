@@ -1,0 +1,82 @@
+#include <iostream>
+
+using namespace std;
+
+class Node 
+{
+public:
+    int data; 
+    Node* next;
+};
+
+class Stack 
+{
+private:
+    Node* top; 
+    int size; 
+
+public:
+    Stack() : top{ nullptr }, size{ 0 } {}
+
+    ~Stack() 
+    {
+        while (!isEmpty()) 
+        {
+            del();
+        }
+    }
+
+    bool isEmpty() 
+    {
+        return top == nullptr;
+    }
+
+    
+    int getsiz() 
+    {
+        return size;
+    }
+
+    void push(int number) 
+    {
+        Node* newNode = new Node{ number };
+        newNode->next = top; 
+        top = newNode; 
+        size++;
+    }
+
+    
+    int del() 
+    {
+        if (isEmpty()) 
+        {
+            return -1;
+        }
+        Node* temp = top; 
+        int dell = temp->data;
+        top = top->next; 
+        delete temp; 
+        size--;
+        return dell; 
+    }
+
+    int function() 
+    {
+        if (isEmpty()) 
+        {
+            return -1; 
+        }
+        return top->data;
+    }
+};
+
+int main() 
+{
+    Stack stack;
+
+    stack.push(10);
+
+    cout << stack.function() << "\n" <<  stack.getsiz() << "\n" <<  stack.del() << "\n" <<  stack.function() << "\n" << stack.getsiz() << "\n";
+
+    return 0;
+}
